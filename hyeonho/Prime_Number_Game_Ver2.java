@@ -2,29 +2,29 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Prime_Number_Game_Ver2 {
-    private int score; // Á¡¼ö
-    private int difficulty; // ³­ÀÌµµ
-    private int[] primes; // ¼Ò¼ö ¹è¿­
+    private int score; // ì ìˆ˜
+    private int difficulty; // ë‚œì´ë„
+    private int[] primes; // ì†Œìˆ˜ ë°°ì—´
 
-    // »ı¼ºÀÚ
+    // ìƒì„±ì
     public Prime_Number_Game_Ver2(int difficulty) {
         this.difficulty = difficulty;
         this.primes = calculatePrimes(difficulty);
-        this.score = 0; // Á¡¼ö ÃÊ±âÈ­
+        this.score = 0; // ì ìˆ˜ ì´ˆê¸°í™”
     }
 
-    // ·£´ı ¼ıÀÚ ÁÖ±â
+    // ëœë¤ ìˆ«ì ì£¼ê¸°
     private int randomGame() {
         Random random = new Random();
         return random.nextInt(difficulty);
     }
 
-    // ¼Ò¼ö¸¦ °è»êÇÏ´Â ¸Ş¼­µå
+    // ì†Œìˆ˜ë¥¼ ê³„ì‚°í•˜ëŠ” ë©”ì„œë“œ
     private int[] calculatePrimes(int difficultyLevel) {
         int newDifficulty = difficultyLevel + 1;
         int[] arr = new int[newDifficulty];
 
-        // ¹è¿­ ¼ıÀÚ ÇÒ´ç
+        // ë°°ì—´ ìˆ«ì í• ë‹¹
         for (int i = 0; i < newDifficulty; i++) {
             arr[i] = i;
         }
@@ -42,9 +42,9 @@ public class Prime_Number_Game_Ver2 {
         return arr;
     }
 
-    // ½Ã°£ Á¦ÇÑÀ» µÎ°í ÀÔ·ÂÀ» ¹Ş´Â ¸Ş¼­µå G¼±»ı´Ô
+    // ì‹œê°„ ì œí•œì„ ë‘ê³  ì…ë ¥ì„ ë°›ëŠ” ë©”ì„œë“œ Gì„ ìƒë‹˜
     private Integer getInputWithTimeout(int timeoutInSeconds) {
-        final Integer[] answer = new Integer[1]; // ¹è¿­À» »ç¿ëÇÏ¿© ½ºÄÚÇÁ ¹®Á¦ ÇØ°á
+        final Integer[] answer = new Integer[1]; // ë°°ì—´ì„ ì‚¬ìš©í•˜ì—¬ ìŠ¤ì½”í”„ ë¬¸ì œ í•´ê²°d
         Thread inputThread = new Thread(() -> {
             Scanner scanner = new Scanner(System.in);
             answer[0] = scanner.nextInt();
@@ -53,53 +53,55 @@ public class Prime_Number_Game_Ver2 {
         inputThread.start();
 
         try {
-            inputThread.join(timeoutInSeconds * 1000); // ½Ã°£ Á¦ÇÑ
+            inputThread.join(timeoutInSeconds * 1000); // ì‹œê°„ ì œí•œ
             if (inputThread.isAlive()) {
-                inputThread.interrupt(); // Å¸ÀÓ¾Æ¿ô ½Ã ÀÔ·Â ½º·¹µå Á¾·á
-                System.out.println("½Ã°£ ÃÊ°ú! ÀÔ·ÂÀ» ¹ŞÁö ¸øÇß½À´Ï´Ù.");
-                return null; // ½Ã°£ ÃÊ°ú
+                inputThread.interrupt(); // íƒ€ì„ì•„ì›ƒ ì‹œ ì…ë ¥ ìŠ¤ë ˆë“œ ì¢…ë£Œ
+                System.out.println("ì‹œê°„ ì´ˆê³¼! ğŸ¤£ğŸ¤£ğŸ¤£ğŸ¤£");
+                return null; // ì‹œê°„ ì´ˆê³¼
             }
         } catch (InterruptedException e) {
-            return null; // ´Ù¸¥ ¿¹¿Ü ¹ß»ı
+            return null; // ë‹¤ë¥¸ ì˜ˆì™¸ ë°œìƒ
         }
 
-        return answer[0]; // ÀÔ·ÂµÈ °ª ¹İÈ¯
+        return answer[0]; // ì…ë ¥ëœ ê°’ ë°˜í™˜
     }
 
-    // °ÔÀÓ ½ÃÀÛ ¸Ş¼­µå
+    // ê²Œì„ ì‹œì‘ ë©”ì„œë“œ
     public void startGame() {
-        System.out.println("¼Ò¼ö ÆÇµ¶ °ÔÀÓÀ» ½ÃÀÛÇÕ´Ï´Ù!");
+        System.out.println("ì†Œìˆ˜ íŒë… ê²Œì„ì„ ì‹œì‘í•©ë‹ˆë‹¤!");
 
         while (true) {
-            // ¹®Á¦ ÃâÁ¦
+            // ë¬¸ì œ ì¶œì œ
             int problem = randomGame();
-            System.out.println("¹®Á¦ " + score);
-            System.out.println("ÃâÁ¦µÈ ¼ıÀÚ: " + problem);
-            System.out.println("¼Ò¼ö¸é 1, ¾Æ´Ï¸é 0À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä:");
+            System.out.println("ë¬¸ì œ " + score);
+            System.out.println("ì¶œì œëœ ìˆ«ì: " + problem);
+            System.out.println("ì†Œìˆ˜ë©´ 1, ì•„ë‹ˆë©´ 0ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”:");
 
-            Integer answer = getInputWithTimeout(3); // 5ÃÊ ½Ã°£ Á¦ÇÑ
+            Integer answer = getInputWithTimeout(3); // 3ì´ˆ ì‹œê°„ ì œí•œ
             if (answer == null) {
-                break; // ½Ã°£ ÃÊ°ú½Ã Á¾·á
+                break; // ì‹œê°„ ì´ˆê³¼ì‹œ ì¢…ë£Œ
             }
 
             boolean correct = (answer == 1 && primes[problem] != 0) || (answer == 0 && primes[problem] == 0);
 
-            // Á¤´äÀÌ ¾Æ´Ï¸é Å»¶ô
+            // ì •ë‹µì´ ì•„ë‹ˆë©´ íƒˆë½
             if (!correct) {
+                System.out.println("ë•¡ ğŸ˜œğŸ˜œğŸ˜œ");
                 break;
             }
 
-            // Á¤´äÀÌ¸é Á¡¼ö Áõ°¡
+            // ì •ë‹µì´ë©´ ì ìˆ˜ ì¦ê°€
             score++;
         }
 
-        // Ãâ·Â
-        System.out.println("´ç½ÅÀÇ Á¡¼ö´Â " + score + "Á¡ÀÔ´Ï´Ù.");
+        // ì¶œë ¥
+        System.out.println("ë‹¹ì‹ ì˜ ì ìˆ˜ëŠ” " + score + "ì ì…ë‹ˆë‹¤.");
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("³­ÀÌµµ¸¦ ÀÔ·ÂÇÏ¼¼¿ä: ");
+        System.out.print("ë‚œì´ë„ëŠ” ìˆ˜ì˜ ë²”ìœ„ì…ë‹ˆë‹¤ ");
+        System.out.print("ë‚œì´ë„ë¥¼ ì…ë ¥í•˜ì„¸ìš”: ");
         int difficulty = scanner.nextInt();
 
         Prime_Number_Game_Ver2 game = new Prime_Number_Game_Ver2(difficulty);

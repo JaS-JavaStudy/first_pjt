@@ -1,29 +1,29 @@
 import java.util.*;
 
 public class Prime_Number_Game {
-    private int score; // Á¡¼ö
-    private int difficulty; // ³­ÀÌµµ
-    private int[] primes; // ¼Ò¼ö ¹è¿­
+    private int score; // ì ìˆ˜
+    private int difficulty; // ë‚œì´ë„
+    private int[] primes; // ì†Œìˆ˜ ë°°ì—´
 
-    // »ı¼ºÀÚ
+    // ìƒì„±ì
     public Prime_Number_Game(int difficulty) {
         this.difficulty = difficulty;
         this.primes = calculatePrimes(difficulty);
-        this.score = 0; // Á¡¼ö ÃÊ±âÈ­
+        this.score = 0; // ì ìˆ˜ ì´ˆê¸°í™”
     }
 
-    // ·£´ı ¼ıÀÚ ÁÖ±â
+    // ëœë¤ ìˆ«ì ì£¼ê¸°
     private int randomGame() {
         Random random = new Random();
         return random.nextInt(difficulty);
     }
 
-    // ¼Ò¼ö¸¦ °è»êÇÏ´Â ¸Ş¼­µå
+    // ì†Œìˆ˜ë¥¼ ê³„ì‚°í•˜ëŠ” ë©”ì„œë“œ
     private int[] calculatePrimes(int difficultyLevel) {
         int newDifficulty = difficultyLevel + 1;
         int[] arr = new int[newDifficulty];
 
-        // ¹è¿­ ¼ıÀÚ ÇÒ´ç
+        // ë°°ì—´ ìˆ«ì í• ë‹¹
         for (int i = 0; i < newDifficulty; i++) {
             arr[i] = i;
         }
@@ -41,50 +41,50 @@ public class Prime_Number_Game {
         return arr;
     }
 
-    
-    
-    
-    
-    // °ÔÀÓ ½ÃÀÛ ¸Ş¼­µå
+
+
+
+
+    // ê²Œì„ ì‹œì‘ ë©”ì„œë“œ
     public void startGame() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("¼Ò¼ö ÆÇµ¶ °ÔÀÓÀ» ½ÃÀÛÇÕ´Ï´Ù!");
+        System.out.println("ì†Œìˆ˜ íŒë… ê²Œì„ì„ ì‹œì‘í•©ë‹ˆë‹¤!");
 
         while (true) {
-            // ¹®Á¦ ÃâÁ¦
+            // ë¬¸ì œ ì¶œì œ
             int problem = randomGame();
-            System.out.println("¹®Á¦ " + score);
-            System.out.println("ÃâÁ¦µÈ ¼ıÀÚ: " + problem);
-            System.out.println("¼Ò¼ö¸é 1, ¾Æ´Ï¸é 0À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä:");
+            System.out.println("ë¬¸ì œ " + score);
+            System.out.println("ì¶œì œëœ ìˆ«ì: " + problem);
+            System.out.println("ì†Œìˆ˜ë©´ 1, ì•„ë‹ˆë©´ 0ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”:");
             boolean correct = true;
             int answer = scanner.nextInt();
             if (answer == 0) {
-            	if (primes[problem] != 0) {
-            		correct = false;
-            	}
-            	
+                if (primes[problem] != 0) {
+                    correct = false;
+                }
+
             }else{
-            	if (primes[problem] == 0) {
-            		correct = false;
-            	}
-            }
-            
-            // Á¤´äÀÌ ¾Æ´Ï¸é Å»¶ô
-            if (correct == false) {
-            	break;
+                if (primes[problem] == 0) {
+                    correct = false;
+                }
             }
 
-            // Á¤´äÀÌ¸é Á¡¼ö Áõ°¡
+            // ì •ë‹µì´ ì•„ë‹ˆë©´ íƒˆë½
+            if (correct == false) {
+                break;
+            }
+
+            // ì •ë‹µì´ë©´ ì ìˆ˜ ì¦ê°€
             score++;
         }
 
-        // Ãâ·Â
-        System.out.println("´ç½ÅÀÇ Á¡¼ö´Â " + score + "Á¡ÀÔ´Ï´Ù.");
+        // ì¶œë ¥
+        System.out.println("ë‹¹ì‹ ì˜ ì ìˆ˜ëŠ” " + score + "ì ì…ë‹ˆë‹¤.");
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("³­ÀÌµµ¸¦ ÀÔ·ÂÇÏ¼¼¿ä: ");
+        System.out.print("ë‚œì´ë„ë¥¼ ì…ë ¥í•˜ì„¸ìš”: ");
         int difficulty = scanner.nextInt();
 
         Prime_Number_Game game = new Prime_Number_Game(difficulty);
